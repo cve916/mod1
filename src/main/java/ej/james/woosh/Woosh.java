@@ -1,6 +1,8 @@
 package ej.james.woosh;
 
 import ej.james.woosh.proxy.CommonProxy;
+import ej.james.woosh.tab.CreativeTabWoosh;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -19,14 +21,19 @@ public class Woosh {
     @SidedProxy(clientSide = "ej.james.woosh.proxy.ClientProxy", serverSide = "ej.james.woosh.proxy.CommonProxy")
     public static CommonProxy proxy;
 
+    @Mod.Instance
+    public static Woosh instance;
 
     private static Logger logger;
+
+    public static CreativeTabWoosh wooshTab;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
         proxy.preInit(event);
         logger = event.getModLog();
+        wooshTab = new CreativeTabWoosh(CreativeTabs.getNextID(), "woosh_tutorial");
     }
 
     @EventHandler
